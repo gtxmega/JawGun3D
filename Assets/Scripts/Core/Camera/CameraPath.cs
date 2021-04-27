@@ -65,6 +65,28 @@ namespace GameCore
         {
             StopAllCoroutines();
         }
+
+
+#if UNITY_EDITOR
+
+        private void OnDrawGizmos() 
+        {
+            Gizmos.color = Color.blue;
+
+            if(m_PathPoints.Length > 0)
+            {               
+                for(int i = 0; i < m_PathPoints.Length; ++i)
+                {
+                    if((i + 1) < m_PathPoints.Length)
+                        Gizmos.DrawLine(m_PathPoints[i].position, m_PathPoints[i + 1].position);
+                }
+            }
+        }
+
+#endif
+
+
     }
+
 
 }
