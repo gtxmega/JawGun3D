@@ -4815,7 +4815,7 @@ GameObject:
   - component: {fileID: 6905781337454837659}
   - component: {fileID: 6905781337454837658}
   m_Layer: 0
-  m_Name: LineLiser
+  m_Name: LineLaser
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
