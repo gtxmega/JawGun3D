@@ -4880,7 +4880,7 @@ LineRenderer:
   - {x: 0, y: 1, z: 1}
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 0.1
+    widthMultiplier: 0.02
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -4971,7 +4971,7 @@ Transform:
   m_GameObject: {fileID: 6905781337456654835}
   m_LocalRotation: {x: 0, y: -0.07358623, z: 0, w: 0.9972889}
   m_LocalPosition: {x: 0, y: -0.49, z: 2.19}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 0.4}
+  m_LocalScale: {x: 1, y: 1, z: 1.2}
   m_Children:
   - {fileID: 6905781337454837659}
   - {fileID: 6905781337162451017}
@@ -4985,7 +4985,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6905781337456654835}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: -2124705421725058983, guid: d6a31669651557f4692d5ff0dab3f25a, type: 3}
 --- !u!23 &6905781337456654839
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -5005,7 +5005,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 190dac6c32ccab74b8846e7baf1ccca6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5052,7 +5052,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8e2c1482cc686844ade99d4e202df9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Power: 0.4
+  m_Power: 1
   m_TargetMask:
     serializedVersion: 2
     m_Bits: 64

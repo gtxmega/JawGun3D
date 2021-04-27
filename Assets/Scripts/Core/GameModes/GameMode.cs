@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace GameCore
 {
@@ -11,8 +12,8 @@ namespace GameCore
         [Header("UI")]
         [SerializeField] private GameObject[] m_StarsForLevel;
         [SerializeField] private GameObject m_FinalPanel;
-        [SerializeField] private GameObject m_TextWonLevel;
-        [SerializeField] private GameObject m_TextLoseLevel;
+        [SerializeField] private Text m_TextFinishLevel;
+
 
         [Header("Start UI")]
         [SerializeField] private GameObject m_StartPanel;
@@ -90,27 +91,14 @@ namespace GameCore
 
         private void GameWin()
         {
-            ShowStarsForLevel();
-
-            m_TextWonLevel.SetActive(true);
-            m_TextLoseLevel.SetActive(false);
-
-            m_FinalPanel.SetActive(true);
-            LevelCompliteStatus = true;
+            ShowGameEndInfo("Level Completed");
         }
 
         private void GameOver()
         {
             m_CameraPath.StopMovement();
 
-            ShowStarsForLevel();
-
-            m_TextLoseLevel.SetActive(true);
-            m_TextWonLevel.SetActive(false);
-
-            m_FinalPanel.SetActive(true);
-            LevelCompliteStatus = true;
-            LevelStart = false;
+            ShowGameEndInfo("Lose");
         }
 
         private void ShowStarsForLevel()
@@ -143,6 +131,23 @@ namespace GameCore
                     m_StarsForLevel[i].SetActive(false);
                 }
             }
+        }
+
+        public void ShowGameEndInfo(string textEndLevel)
+        {
+            ShowStarsForLevel();
+
+            m_TextFinishLevel.text = textEndLevel;
+            
+            SetLevelStatus();
+
+            m_FinalPanel.SetActive(true);
+        }
+
+        private void SetLevelStatus()
+        {
+            LevelCompliteStatus = true;
+            LevelStart = false;
         }
 
     }
