@@ -31,39 +31,61 @@ namespace GameCore
         {
             if(Input.GetMouseButton(0) && m_GameMode.LevelStart)
             {
-                Ray _ray = m_Camera.ScreenPointToRay(Input.mousePosition);
-
-                if(Physics.Raycast(_ray, out RaycastHit hitInfo, 30.0f, m_TargetMask))
+                RaycastHit hitInfo;
+                IRaycastTarget target = GetRaycastTarget(out hitInfo);
+                
+                if(target != null)
                 {
                     m_Transform.LookAt(hitInfo.point);
-
-                    m_LineLiser.SetPosition(0, m_Transform.position);
-                    m_LineLiser.SetPosition(1, hitInfo.point);
-                    m_LineLiser.gameObject.SetActive(true);
-
-                    IRaycastTarget target = hitInfo.collider.GetComponent<IRaycastTarget>();
                     
-                    if(target != null)
-                    {
-                        m_GunDecalPartical.position = hitInfo.point;
-                        m_GunDecalPartical.LookAt(m_Camera.transform.position);
-                        m_GunDecalPartical.gameObject.SetActive(true);
+                    ShowVFX(hitInfo.point);
 
-                        target.ApplyDamage(m_Power);
-                    }else
-                    {
-                        m_GunDecalPartical.gameObject.SetActive(false);
-                    }
-
+                    target.ApplyDamage(m_Power);
+                }else
+                {
+                    HideVFX();
                 }
             }else
             {
-                m_LineLiser.gameObject.SetActive(false);
-                m_GunDecalPartical.gameObject.SetActive(false);
+                HideVFX();
             }
+
         }
 
 #endregion
+
+        private IRaycastTarget GetRaycastTarget(out RaycastHit hitInfo)
+        {
+            Ray _ray = m_Camera.ScreenPointToRay(Input.mousePosition);
+
+            if(Physics.Raycast(_ray, out hitInfo, 30.0f, m_TargetMask))
+            {
+                IRaycastTarget target = hitInfo.collider.GetComponent<IRaycastTarget>();
+                if(target != null)
+                {
+                    return target;
+                }
+            }
+
+            return null;
+        }
+
+        private void ShowVFX(Vector3 positionVFX)
+        {
+            m_LineLiser.SetPosition(0, m_Transform.position);
+            m_LineLiser.SetPosition(1, positionVFX);
+            m_LineLiser.gameObject.SetActive(true);
+
+            m_GunDecalPartical.position = positionVFX;
+            m_GunDecalPartical.LookAt(m_Camera.transform.position);
+            m_GunDecalPartical.gameObject.SetActive(true);
+        }
+
+        private void HideVFX()
+        {
+            m_LineLiser.gameObject.SetActive(false);
+            m_GunDecalPartical.gameObject.SetActive(false);
+        }
 
 
     }

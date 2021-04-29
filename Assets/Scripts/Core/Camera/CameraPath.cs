@@ -18,7 +18,6 @@ namespace GameCore
         [Header("Params")]
         [SerializeField] private float m_Speed;
         [SerializeField] private Transform m_FollowObject;
-        [SerializeField] private Vector3 m_PositionOffset;
 
 
         public void StartMove()

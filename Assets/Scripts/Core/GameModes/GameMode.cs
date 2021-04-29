@@ -74,8 +74,7 @@ namespace GameCore
         {
             foreach(var item in m_AllDisease)
             {
-                item.ResetLevelFill();
-                item.gameObject.SetActive(true);
+                item.ResetState();
             }
 
             m_Patient.ResetCurrentLevelPain();
