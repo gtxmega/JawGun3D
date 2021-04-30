@@ -24,7 +24,7 @@ namespace GameCore
             timerDelay = timeDelayApplyDamage;
         }
 
-        public void ApplyDamage(float amount)
+        public void ApplyDamage(float amount, Vector3 rayDirection)
         {
             if(timerDelay <= 0.0f)
             {

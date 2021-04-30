@@ -40,7 +40,7 @@ namespace GameCore
                     
                     ShowVFX(hitInfo.point);
 
-                    target.ApplyDamage(m_Power);
+                    target.ApplyDamage(m_Power, hitInfo.normal);
                 }else
                 {
                     HideVFX();

@@ -9,7 +9,7 @@ namespace GameCore
 
     #region  Interface IRaycastTarget
 
-            public virtual void ApplyDamage(float damage)
+            public virtual void ApplyDamage(float damage, Vector3 rayDirection)
             {
 
             }

@@ -1,53 +1,37 @@
-using System.Collections;
 using UnityEngine;
 
 namespace GameCore
 {
-    [RequireComponent(typeof(Rigidbody))]
+    [RequireComponent(typeof(ShardController))]
     public class HardPlaque : Disease
     {
-        private Transform m_Transform;
-        private Vector3 m_StartPosition;
-        private Quaternion m_StartRotation;
+        [SerializeField] private Rigidbody[] m_Shards;
+
+
+        private ShardController m_ShardController;
 
         private Coroutine m_SelfDesctructionCoroutine;
-        private Rigidbody m_RigidBody;
 
 
     #region  MonoBehavior Methods
 
-            private void Start() 
-            {
-                m_Transform = GetComponent<Transform>();
-                m_StartPosition = m_Transform.position;
-                m_StartRotation = m_Transform.rotation;
-
-                m_RigidBody = GetComponent<Rigidbody>();
-                m_RigidBody.isKinematic = true;
-            }
+        private void Start() 
+        {
+            m_ShardController = GetComponent<ShardController>();
+            m_ShardController.Initialize(m_Shards);
+        }
 
     #endregion
 
     #region Interface IRaycastTarget
 
-            public override void ApplyDamage(float amount)
+            public override void ApplyDamage(float amount, Vector3 rayDirection)
             {
-                m_RigidBody.AddForce(m_Transform.up * 2.0f, ForceMode.Acceleration);
-
                 if(m_SelfDesctructionCoroutine == null)
-                    m_SelfDesctructionCoroutine = StartCoroutine(SelfDestruction());
-            }
-
-            private IEnumerator SelfDestruction()
-            {
-                m_RigidBody.isKinematic = false;
-
-                yield return new WaitForSeconds(2.0f);
-
-                m_RigidBody.isKinematic = true;
-                gameObject.SetActive(false);
-
-                m_SelfDesctructionCoroutine = null;
+                {
+                    m_ShardController.ShowShards(rayDirection);
+                    gameObject.SetActive(false);
+                }
             }
 
     #endregion
@@ -56,11 +40,13 @@ namespace GameCore
 
             public override void ResetState()
             {
-                m_Transform.position = m_StartPosition;
-                m_Transform.rotation = m_StartRotation;
-                m_RigidBody.isKinematic = true;
-
+                m_ShardController.ResetState();
                 base.ResetState();
+            }
+
+            public void SetShards(Rigidbody[] rigidbodies)
+            {
+                m_Shards = rigidbodies;
             }
 
     #endregion
