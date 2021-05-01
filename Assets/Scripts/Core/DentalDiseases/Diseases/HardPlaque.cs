@@ -10,8 +10,6 @@ namespace GameCore
 
         private ShardController m_ShardController;
 
-        private Coroutine m_SelfDesctructionCoroutine;
-
 
     #region  MonoBehavior Methods
 
@@ -27,11 +25,8 @@ namespace GameCore
 
             public override void ApplyDamage(float amount, Vector3 rayDirection)
             {
-                if(m_SelfDesctructionCoroutine == null)
-                {
-                    m_ShardController.ShowShards(rayDirection);
-                    gameObject.SetActive(false);
-                }
+                m_ShardController.ShowShards(rayDirection);
+                gameObject.SetActive(false);
             }
 
     #endregion
