@@ -32,8 +32,6 @@ namespace GameCore
 
         public void ShowShards(Vector3 applyForce)
         {
-            transform.DetachChildren();
-
             for(int i = 0; i < m_ShardRigidBodies.Length; ++i)
             {
                 m_ShardRigidBodies[i].isKinematic = false;
