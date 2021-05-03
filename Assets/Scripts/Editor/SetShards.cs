@@ -28,4 +28,5 @@ public class SetShards : EditorWindow
             iter.gameObject.SetActive(false);
         }
     }
+    
 }

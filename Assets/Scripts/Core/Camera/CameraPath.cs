@@ -20,8 +20,24 @@ namespace GameCore
         [SerializeField] private Transform m_FollowObject;
 
 
+        private Transform m_CameraTransform;
+        private Quaternion m_StartCameraRotation;
+
+
+    #region MonoBehavior Methods
+
+        private void Start() 
+        {
+            m_CameraTransform = Camera.main.transform;
+            m_StartCameraRotation = m_CameraTransform.rotation;
+        }
+
+    #endregion
+
+
         public void StartMove()
         {
+
             if(m_PathPoints.Length > 0)
             {
                 StartCoroutine(ProcessMove());
@@ -58,6 +74,7 @@ namespace GameCore
 
         public void ResetPosition()
         {
+            m_CameraTransform.rotation = m_StartCameraRotation;
             m_FollowObject.position = m_PathPoints[0].position;
         }
 

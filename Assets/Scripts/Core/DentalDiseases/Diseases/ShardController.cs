@@ -12,8 +12,12 @@ namespace GameCore
 
         private Rigidbody[] m_ShardRigidBodies;
 
+        private Transform m_Transform;
+
         public void Initialize(Rigidbody[] shards)
         {
+            m_Transform = transform;
+
             m_ShardTransforms = new Transform[shards.Length];
             m_ShardStartPositions = new Vector3[shards.Length];
             m_ShardStartRotations = new Quaternion[shards.Length];
@@ -23,8 +27,8 @@ namespace GameCore
             {
                 m_ShardTransforms[i] = shards[i].transform;
 
-                m_ShardStartPositions[i] = m_ShardTransforms[i].position;
-                m_ShardStartRotations[i] = m_ShardTransforms[i].rotation;
+                m_ShardStartPositions[i] = m_ShardTransforms[i].localPosition;
+                m_ShardStartRotations[i] = m_ShardTransforms[i].localRotation;
 
                 m_ShardRigidBodies[i] = shards[i];
             }
@@ -45,14 +49,17 @@ namespace GameCore
 
         public void ResetState()
         {
+
             for(int i = 0; i < m_ShardTransforms.Length; ++i)
             {
                 m_ShardTransforms[i].gameObject.SetActive(false);
 
+                m_ShardTransforms[i].SetParent(transform);
+
                 m_ShardRigidBodies[i].isKinematic = true;
 
-                m_ShardTransforms[i].position = m_ShardStartPositions[i];
-                m_ShardTransforms[i].rotation = m_ShardStartRotations[i];
+                m_ShardTransforms[i].localPosition = m_ShardStartPositions[i];
+                m_ShardTransforms[i].localRotation = m_ShardStartRotations[i];
 
             }
         }
