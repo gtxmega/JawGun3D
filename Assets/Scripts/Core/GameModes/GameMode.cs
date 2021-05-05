@@ -1,10 +1,17 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 namespace GameCore
 {
     public class GameMode : MonoBehaviour
     {
+    #region  UNITY EVENTS
+        public UnityEvent EventLevelStart = new UnityEvent();
+        public UnityEvent EventLevelWin = new UnityEvent();
+        public UnityEvent EventLevelLose = new UnityEvent();
+    #endregion
+
         public bool LevelCompliteStatus {get; private set;}
         public bool LevelStart {get; private set;}
 
@@ -68,6 +75,8 @@ namespace GameCore
 
             LevelCompliteStatus = false;
             LevelStart = true;
+
+            EventLevelStart.Invoke();
         }
 
         public void RestartLevel()
@@ -86,11 +95,14 @@ namespace GameCore
 
             LevelCompliteStatus = false;
             LevelStart = true;
+
+            EventLevelStart.Invoke();
         }
 
         private void GameWin()
         {
             ShowGameEndInfo("Level Completed");
+            EventLevelWin.Invoke();
         }
 
         private void GameOver()
@@ -98,6 +110,7 @@ namespace GameCore
             m_CameraPath.StopMovement();
 
             ShowGameEndInfo("Lose");
+            EventLevelLose.Invoke();
         }
 
         private void ShowStarsForLevel()

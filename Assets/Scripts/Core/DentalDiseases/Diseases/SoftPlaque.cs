@@ -19,7 +19,7 @@ namespace GameCore
 
 #region  Interface IRaycastTarget
 
-        public override void ApplyDamage(float damage)
+        public override void ApplyDamage(float damage, Vector3 rayDirection)
         {
             ChangeFill(damage);
             

@@ -19,7 +19,7 @@ namespace GameCore
 
 #region  Interface IRaycastTarget
 
-        public void ApplyDamage(float damage)
+        public void ApplyDamage(float damage, Vector3 rayDirection)
         {
             m_Patient.ApplyPain(damage);
         }

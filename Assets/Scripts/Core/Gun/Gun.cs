@@ -38,9 +38,12 @@ namespace GameCore
                 {
                     m_Transform.LookAt(hitInfo.point);
                     
+                    Quaternion rotation = Quaternion.LookRotation(hitInfo.point - m_Camera.transform.position, Vector3.up);
+                    m_Camera.transform.rotation = Quaternion.Lerp(m_Camera.transform.rotation, rotation, Time.deltaTime * 1.0f);
+                    
                     ShowVFX(hitInfo.point);
 
-                    target.ApplyDamage(m_Power);
+                    target.ApplyDamage(m_Power, hitInfo.normal);
                 }else
                 {
                     HideVFX();
